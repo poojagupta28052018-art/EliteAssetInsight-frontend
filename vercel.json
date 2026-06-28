@@ -3,6 +3,10 @@
     {
       "path": "/api/agent/ingest",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/agent/daily-report",
+      "schedule": "0 7 * * *"
     }
   ]
 }
