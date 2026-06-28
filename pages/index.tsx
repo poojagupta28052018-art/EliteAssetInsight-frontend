@@ -51,7 +51,7 @@ export default function Home() {
   const [subStatus, setSubStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
 
   useEffect(() => {
-    fetch('/api/listings').then(r => r.json()).then(setListings).catch(() => {})
+    fetch('/api/listings').then(r => r.json()).then(d => setListings(Array.isArray(d) ? d : [])).catch(() => {})
   }, [])
 
   const handleSubscribe = async (e: React.FormEvent) => {

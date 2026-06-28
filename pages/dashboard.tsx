@@ -49,7 +49,7 @@ export default function Dashboard() {
   const [triggerStatus, setTriggerStatus] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/listings').then(r => r.json()).then(setListings).catch(() => {})
+    fetch('/api/listings').then(r => r.json()).then(d => setListings(Array.isArray(d) ? d : [])).catch(() => {})
     fetch('/api/agent/status').then(r => r.json()).then(setAgentStatus).catch(() => {})
   }, [])
 
@@ -63,7 +63,7 @@ export default function Dashboard() {
       if (!res.ok) throw new Error(data.error)
       setTriggerStatus(`Done — ${data.listings_saved} listings added`)
       fetch('/api/agent/status').then(r => r.json()).then(setAgentStatus).catch(() => {})
-      fetch('/api/listings').then(r => r.json()).then(setListings).catch(() => {})
+      fetch('/api/listings').then(r => r.json()).then(d => setListings(Array.isArray(d) ? d : [])).catch(() => {})
     } catch (e: any) {
       setTriggerStatus(`Error: ${e.message}`)
     }

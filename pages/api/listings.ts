@@ -10,7 +10,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
     if(url && serviceKey){
       const supabase = createClient(url, serviceKey)
       const { data, error } = await supabase.from('listings').select('*').order('created_at', { ascending: false }).limit(50)
-      if(error) return res.status(500).json({error:error.message})
+      if(error) return res.status(200).json([])
       return res.status(200).json(data)
     }
     // fallback sample data
