@@ -232,29 +232,6 @@ export default function Layout({ children, title, description, ogImage, keywords
         </div>
       </footer>
 
-      {/* WhatsApp floating button */}
-      <a
-        href="https://wa.me/message/ELITEASSETINSIGHT"
-        target="_blank"
-        rel="noopener noreferrer"
-        title="Chat on WhatsApp"
-        style={{
-          position: 'fixed', bottom: '1.8rem', right: '1.8rem', zIndex: 999,
-          width: '56px', height: '56px', borderRadius: '50%',
-          background: '#25d366',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 4px 16px rgba(37,211,102,0.4)',
-          textDecoration: 'none', fontSize: '1.5rem',
-          transition: 'transform 0.2s',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
-        onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-      >
-        <svg viewBox="0 0 32 32" width="28" height="28" fill="white">
-          <path d="M16 2C8.268 2 2 8.268 2 16c0 2.478.648 4.801 1.778 6.816L2 30l7.395-1.739A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.54 11.54 0 01-5.882-1.606l-.421-.252-4.39 1.032 1.065-4.276-.276-.44A11.557 11.557 0 014.4 16C4.4 9.59 9.59 4.4 16 4.4c6.41 0 11.6 5.19 11.6 11.6 0 6.41-5.19 11.6-11.6 11.6zm6.356-8.674c-.348-.174-2.063-1.018-2.382-1.134-.32-.116-.552-.174-.784.174-.232.347-.9 1.134-1.102 1.367-.203.232-.406.261-.753.087-.348-.174-1.47-.542-2.8-1.726-1.034-.922-1.732-2.062-1.935-2.41-.203-.347-.022-.535.152-.708.157-.156.348-.406.522-.61.174-.203.232-.347.348-.578.116-.232.058-.435-.029-.61-.087-.174-.784-1.888-1.074-2.586-.282-.68-.57-.587-.784-.598l-.668-.012c-.232 0-.61.087-.928.435-.32.347-1.218 1.19-1.218 2.904 0 1.714 1.247 3.37 1.42 3.602.174.232 2.455 3.748 5.95 5.256.832.36 1.481.574 1.987.735.835.266 1.595.228 2.196.138.67-.1 2.063-.843 2.354-1.658.29-.814.29-1.512.203-1.658-.087-.145-.32-.232-.668-.406z" />
-        </svg>
-      </a>
-
       <style jsx global>{`
         .desktop-nav a:hover { color: var(--gold) !important; }
         @media(max-width:960px) {
