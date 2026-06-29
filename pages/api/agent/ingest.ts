@@ -1,9 +1,11 @@
 /**
  * EliteAssetInsight — Daily Ingest Agent (Groq AI powered)
- * Runs automatically via Vercel Cron Job every day at 00:00 UTC.
+ * Runs automatically via cron-job.org every day at 00:00 UTC.
  * Scrapes public auction RSS feeds, formats with Groq AI, saves to Supabase.
- * Auth: x-agent-secret header (admin manual) or Authorization: Bearer CRON_SECRET (Vercel cron)
+ * Auth: x-agent-secret header (admin manual) or Authorization: Bearer CRON_SECRET (cron-job.org)
  */
+export const runtime = 'nodejs'
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 

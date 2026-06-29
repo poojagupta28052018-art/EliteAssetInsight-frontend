@@ -2,6 +2,8 @@
  * Returns the last agent run status and listing counts.
  * Used by admin dashboard to show automated stats.
  */
+export const runtime = 'nodejs'
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 

@@ -2,6 +2,8 @@
  * Creates a PayPal order for membership plans.
  * Supports both sandbox and live environments.
  */
+export const runtime = 'nodejs'
+
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const PAYPAL_BASE = process.env.PAYPAL_ENV === 'live'

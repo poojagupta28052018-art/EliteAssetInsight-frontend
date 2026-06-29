@@ -2,6 +2,8 @@
  * Captures a PayPal order after buyer approves.
  * Saves the membership record to Supabase automatically.
  */
+export const runtime = 'nodejs'
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 
