@@ -1,5 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+// Stripe removed — PayPal only
+import { NextRequest, NextResponse } from 'next/server'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(410).json({ error: 'Stripe removed. Use /api/paypal/ endpoints.' })
+export const config = { runtime: 'edge' }
+
+export default function handler(_req: NextRequest) {
+  return NextResponse.json({ error: 'Stripe removed. Use /api/paypal/ endpoints.' }, { status: 410 })
 }

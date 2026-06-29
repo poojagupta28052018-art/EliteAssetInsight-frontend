@@ -1,14 +1,15 @@
-export const runtime = 'nodejs'
-
-import { NextApiRequest, NextApiResponse } from 'next'
+// pages/api/newsletter.ts — Edge runtime, Cloudflare Pages compatible
+import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') return res.status(405).end()
+export const config = { runtime: 'edge' }
 
-  const { email, name } = req.body
+export default async function handler(req: NextRequest) {
+  if (req.method !== 'POST') return new NextResponse(null, { status: 405 })
+
+  const { email, name } = await req.json()
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: 'Valid email required' })
+    return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
   }
 
   try {
@@ -16,18 +17,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY
     if (url && key) {
       const supabase = createClient(url, key)
-      const { error } = await supabase
-        .from('newsletter_subscribers')
-        .upsert([{ email, name: name || null, subscribed_at: new Date().toISOString() }], { onConflict: 'email' })
-      if (error) {
-        if (error.code === '42P01') {
-          return res.status(200).json({ ok: true, message: 'Subscribed (DB table not yet created — run migrations)' })
-        }
-        return res.status(500).json({ error: error.message })
-      }
+      const { error } = await supabase.from('newsletter_subscribers').upsert([{ email, name: name || null, subscribed_at: new Date().toISOString() }], { onConflict: 'email' })
+      if (error && error.code !== '42P01') return NextResponse.json({ error: error.message }, { status: 500 })
     }
-    return res.status(200).json({ ok: true, message: 'Subscribed successfully' })
+    return NextResponse.json({ ok: true, message: 'Subscribed successfully' })
   } catch (e: any) {
-    return res.status(500).json({ error: e.message })
+    return NextResponse.json({ error: e.message }, { status: 500 })
   }
 }
